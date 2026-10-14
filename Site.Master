@@ -1,0 +1,284 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="textiles.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> | Online Clothing Store - TEXTILES</title>
+
+    <!-- Google Fonts & Font Awesome CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        :root {
+            --primary-blue: #1967d2;
+            --primary-blue-dark: #1557b0;
+            --primary-blue-light: #eaf2fb;
+            --secondary-blue: #0d47a1;
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --success-green: #2e7d32;
+            --danger-red: #d32f2f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ================= TOP NAVBAR ================= */
+        .site-navbar {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 0 5%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .site-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .site-brand i {
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 6px;
+        }
+
+        .nav-links li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.16);
+        }
+
+        .nav-links li a.active {
+            background-color: rgba(255, 255, 255, 0.24);
+            font-weight: 600;
+        }
+
+        .nav-cart-badge {
+            background: #ffffff;
+            color: var(--primary-blue);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 12px;
+            margin-left: 4px;
+        }
+
+        .nav-login-pill {
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px !important;
+            padding: 8px 18px !important;
+        }
+
+        .nav-login-pill:hover {
+            background: #ffffff !important;
+            color: var(--primary-blue) !important;
+        }
+
+        .nav-user-pill {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 20px !important;
+            padding: 8px 16px !important;
+        }
+
+        /* ================= MAIN CONTENT WRAPPER ================= */
+        .site-main-content {
+            flex: 1;
+            width: 100%;
+        }
+
+        /* ================= FOOTER ================= */
+        .site-footer {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-inner {
+            padding: 22px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-left {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            flex-wrap: wrap;
+        }
+
+        .footer-right span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-divider {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 900px) {
+            .site-navbar {
+                height: auto;
+                padding: 12px 4%;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .footer-right {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server" novalidate="novalidate">
+        <!-- TOP NAVBAR (FIGMA WIREFRAME) -->
+        <nav class="site-navbar">
+            <a href="index.aspx" class="site-brand">
+                <i class="fa-solid fa-shapes"></i> TEXTILES
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.aspx"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="product.aspx"><i class="fa-solid fa-shirt"></i> Men</a></li>
+                <li><a href="About.aspx"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
+                <li><a href="Contact.aspx"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                <li>
+                    <a href="cart.aspx">
+                        <i class="fa-solid fa-cart-shopping"></i> Cart
+                        <span class="nav-cart-badge"><%= CartCount %></span>
+                    </a>
+                </li>
+                <% if (!IsLoggedIn) { %>
+                    <li>
+                        <a href="login.aspx" class="nav-login-pill">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                        </a>
+                    </li>
+                <% } else { %>
+                    <% if (IsAdmin) { %>
+                        <li><a href="admin.aspx" style="color: #ffeb3b;"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
+                    <% } %>
+                    <li>
+                        <a href="profile.aspx" class="nav-user-pill">
+                            <i class="fa-solid fa-circle-user"></i> <%= UserName %>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.aspx?action=logout" style="opacity: 0.85;">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="site-main-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+
+        <!-- FOOTER (EXACT FIGMA WIREFRAME) -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-left">
+                    &copy; 2026 Online Clothing Store. All rights reserved.
+                </div>
+                <div class="footer-right">
+                    <span><i class="fa-regular fa-envelope"></i> support@onlineclothingstore.com</span>
+                    <span class="footer-divider">|</span>
+                    <span><i class="fa-solid fa-phone"></i> +91 9876543210</span>
+                    <span class="footer-divider">|</span>
+                    <span><i class="fa-solid fa-location-dot"></i> Rajkot, Gujarat, India</span>
+                </div>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>
